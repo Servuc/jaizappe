@@ -4,7 +4,7 @@
 
 ## Pourquoi ?
 
-Petits mémos pour être incontournable !
+Petits mémos pour être le plus fort !
 
 ## Télécharger
 
