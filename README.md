@@ -6,6 +6,16 @@
 
 Petits mémos pour être incontournable !
 
+## Télécharger
+
+Vous pouvez télécharger les fichiers déjà compilés :
+
+ - [Haskell](https://github.com/Servuc/jaizappe/raw/master/haskell.pdf)
+ - [LaTeX](https://github.com/Servuc/jaizappe/raw/master/latex.pdf)
+ - [LaTeX Advanced](https://github.com/Servuc/jaizappe/raw/master/latex-advanced.pdf)
+ - [Octave](https://github.com/Servuc/jaizappe/raw/master/octave.pdf)
+ - [XML](https://github.com/Servuc/jaizappe/raw/master/xml.pdf)
+
 ## Compilation
 
 ### Requis
