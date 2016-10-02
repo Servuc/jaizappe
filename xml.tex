@@ -1,0 +1,306 @@
+\input{include/base-document}
+\begin{document}
+    \fcolorbox{black}{black}{
+    \begin{minipage}{\linewidth}
+        \begin{center}
+            {\Huge{\color{white}\#Jaizappé ...\\... le XML et XSchema}}
+        \end{center}
+    \end{minipage}}
+
+    \section{Histoire}
+        La première version de \textbf{XML} (\textit{1.0}) est apparu en février 1998. Le \textbf{XML} est inspiré du \textbf{SGML} et \textbf{HTML}.\\
+        \textbf{XML} signifie e\textbf{X}tensible \textbf{M}arkup \textbf{L}anguage.
+
+        \subsection{Commentaires}
+            Un commentaire est un message caché à l'exécution.
+            \begin{lstlisting}[language=XML]
+<!-- Un com. de 1 ou + ligne(s) -->
+            \end{lstlisting}
+    \section{Base}
+        Un fichier \textbf{XML} a pour extension \textit{.xml} et commence par :
+        \begin{lstlisting}[language=XML]
+<?xml version="1.0">
+        \end{lstlisting}
+        Ensuite on ajoute des éléments :
+        \begin{lstlisting}[language=XML]
+<?xml version="1.0">
+<!DOCTYPE livreDef>
+<livre>
+	<pages>
+		<page numero="1">
+			Première page
+		</page>
+		<page numero="2">
+			Seconde page
+		</page>
+	</pages>
+	<auteur>Michel</auteur>
+	<isbn value="xXXXXXXXx" />
+</livre>
+        \end{lstlisting}
+        Ici, on a décrit un livre. \textit{numero=``X''} est un attribut de \textit{page}.\\
+        \textit{<livre>} est une balise ouvrante, \textit{</livre>} en est une fermante.\\
+        \textit{Michel} est le contenu de \textit{auteur}.
+        \subsection{Appel externe}
+            On peut appeler une application externe lors de l'affichage
+            \begin{lstlisting}[language=XML]
+<?application code ?>
+<!-- Exemple -->
+<?php echo "Hello World"; ?>
+            \end{lstlisting}
+    \section{DTD}
+        La \textbf{DTD} permet de formaliser un fichier \textit{XML}, elle se place juste après la ligne : \textit{<?xml ...>}.
+        \subsection{Élément simple}
+            C'est un élément sans balise dans son contenu :
+            \begin{lstlisting}[language=XML]
+<!ELEMENT page(#PCDATA)>
+            \end{lstlisting}
+        \subsection{Élément vide}
+            C'est un élément sans contenu ni balise :
+            \begin{lstlisting}[language=XML]
+<!ELEMENT isbn EMPTY>
+<!ATTLIST isbn value(CDATA)>
+            \end{lstlisting}
+        \subsection{Élément d'élément(s)}
+            C'est un élément avec QUE des balises :
+            \begin{lstlisting}[language=XML]
+<!ELEMENT livre(pages, auteur+)>
+<!ELEMENT pages(page+)>
+            \end{lstlisting}
+            Le \textbf{+} après \textit{page} signifie que l'on a au moins un élément \textit{page} : $[1, +\infty[$. $* = [0, +\infty[$, $? = [0,1]$. Si on ne met rien, cela veut dire 1.
+        \subsection{Élément d'élément(s) ou simple}
+            Admettons que l'on est une \textit{page} seulement, on peut directement mettre le contenu
+            \begin{lstlisting}[language=XML]
+<!ELEMENT pages(#PCDATA|page+)>
+            \end{lstlisting}
+            \begin{lstlisting}[language=XML]
+<?xml version="1.0">
+<!DOCTYPE livreDef>
+<livre>
+	<pages>Page 1</pages>
+	<auteur>Michel</auteur>
+</livre>
+            \end{lstlisting}
+        \subsection{Entités}
+            Elles servent de raccourci :
+            \begin{lstlisting}[language=XML]
+<!ENTITY cle="valeur">
+<!-- Et dans le XML -->
+<noeud attr="&autreCle;">&cle;</noeud>
+            \end{lstlisting}
+        \subsection{Attribut d'élément}
+            Équivalent à des paramètres :
+            \begin{lstlisting}[language=XML]
+<!ATTLIST balise nomAttri (type) option>
+<!-- exemple -->
+<!ATTLIST page numero (CDATA) #REQUIRED>
+            \end{lstlisting}
+            Les types sont :
+            \begin{itemize}
+                \item \textbf{CDATA} : Une chaine de caractères;
+                \item \textbf{ID} : Attribut unique;
+                \item \textbf{IDREF} : Fait référence à un \textbf{ID};
+                \item \textbf{valeur1|valeur2|...} : On met les possibilités;
+                \item \textbf{ENTITY} : Fait référence à une entitée.
+            \end{itemize}
+            Les options sont :
+            \begin{itemize}
+                \item \textbf{\#REQUIRED} : Attribut obligatoire;
+                \item \textbf{\#IMPLIED} : (Par défaut), attribut non obligatoire;
+                \item \textbf{\#FIXED valeur} : Indique une valeur par défaut.
+            \end{itemize}
+        \subsection{Doctype}
+            \begin{lstlisting}[language=XML]
+<!DOCTYPE livreDef [ <!-- DTD ici --> ]>
+            \end{lstlisting}
+            Ensuite, on met le \textbf{XML}. On peut l'inclure par un lien système (Ensuite on met le \textbf{XML}) :
+            \begin{lstlisting}[language=XML]
+<!DOCTYPE livreDef SYSTEM "livreDef.dtd">
+            \end{lstlisting}
+        \subsection{Fichiers externes}
+            Il s'agit d'images, sons, documents, ... :
+            \begin{lstlisting}[language=XML]
+<!DOCTYPE vrml [
+  <!ELEMENT vrml (#PCDATA)>
+  <!NOTATION vrml PUBLIC "VRML 1.0">
+]>
+<!DOCTYPE img [
+  <!ELEMENT img EMPTY>
+  <!ATTLIST img src ENTITY #REQUIRED>
+  <!ENTITY logo SYSTEM "logo.gif" NDATA gif>
+  <!NOTATION gif PUBLIC "/usr/bin/gimp">
+]>
+<!-- XML -->
+<img src="logo"/>
+<vrml>Instructions VRML</vrml>
+            \end{lstlisting}
+    \section{XML Schema}
+        On peut voir le \textbf{XML Schema} ou \textbf{XSD} comme une amélioration de la \textbf{DTD}.
+        \subsection{Commentaires}
+            \begin{lstlisting}[language=XML]
+<xsd:annotation>Com.</xsd:annotation>
+            \end{lstlisting}
+        \subsection{Base}
+            \begin{lstlisting}[language=XML]
+<?xml version="1 .0">
+<xsd:schema
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ targetNamespace="http://www.librairie.org"
+ xmlns="http://www.librairie.org">
+<!-- code XSD -->
+</xsd:schema>
+            \end{lstlisting}
+            Du fait de sa taille, je ne l'écrirais plus ensuite.
+
+        \subsection{Élément de base}
+            \begin{tabular}{| l | l |}
+                \hline
+                xsd:string & Chaine normale\\
+                xsd:normalizedString & Idem que prec. sans $\backslash$r $\backslash$n $\backslash$t\\
+                xsd:token & Idem que prec. sans espace.\\
+                \hline
+                xsd:time & hh:mm:ss\\
+                xsd:date & AAAA-MM-JJ\\
+                xsd:dateTime & AAAA-MM-JJThh:mm:ss\\
+                xsd:duration & PnAnMnJTnHnMnS\\
+                \hline
+                \multicolumn{2}{| l |}{xsd:int xsd:long xsd:byte xsd:short xsd:decimal}\\
+                \hline
+                xsd:unsignedXxxxxx & Xxxxxx : Int Short ...\\
+                \hline
+                xsd:boolean & 1 : true, 0 : false\\
+                \hline
+                xsd:hexBinary & Données Hexa\\
+                \hline
+                xsd:anyURI & URL\\
+                \hline
+            \end{tabular}
+            \\
+            Le \textbf{T} dans \textit{dateTime} fait la séparation.\\
+            Pour \textit{duration}, \textit{nX} : nombre de XXXXX.\\
+            On l'utilise ainsi :
+            \begin{lstlisting}[language=XML]
+<xsd:element name="nom" type="xsd:xxxxxxx"/>
+            \end{lstlisting}
+            On peut ajouter les attributs suivants aux \textbf{xsd:element} :
+            \begin{itemize}
+                \item \textbf{maxInclusive}, \textbf{minInclusive},\textbf{maxExclusive}, \textbf{minExclusive} pour encadrer les nombres;
+                \item \textbf{length}, \textbf{maxLength}, \textbf{minLength} : Longueur du texte;
+                \item \textbf{pattern} : Une regex.
+            \end{itemize}
+        \subsection{Élément complexe}
+            Il faut voir ça comme les éléments souvent basés sur des ensembles :
+            \begin{lstlisting}[language=XML]
+<xsd:element name="nom">
+  <xsd:complexType>
+    <xsd:sequence>
+      <xsd:element ref="autreNom"/>
+      <xsd:element name="autreNom2"
+          type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:element>  
+            \end{lstlisting}
+            Sur les \textit{xsd:element} avec l'attribut \textit{ref} peuvent avoir ces attributs :
+            \begin{itemize}
+                \item \textbf{minOccurs} : unbounded ou un nombre : Nombre minimum d'occurence;
+                \item \textbf{maxOccurs} : unbounded ou un nombre : Nombre maximum d'occurence;
+            \end{itemize}
+            On peut même faire de l'héritage :
+            \begin{lstlisting}[language=XML]
+<xsd:complexType name="nomFils">
+ <xsd:ComplexContent>
+  <xsd:extension base="nom">
+    <xsd:sequence>
+      <xsd:element name="autreNom3"
+          type="xsd:string"/>
+    </xsd:sequence>
+  <xsd:extension>
+ </xsd:complexContent>
+</xsd:complexType>
+            \end{lstlisting}
+            Faire un choix :
+            \begin{lstlisting}
+<xsd:complexType name="pere">
+  <xsd:choice minOccurs="0"
+      maxOccurs="unbounded">
+    <xsd:element name="n1"
+        type="xsd:string"/>
+    <xsd:element name="n2"
+        type="xsd:string"/>
+  </xsd:choice>
+</xsd:complexType>
+            \end{lstlisting}
+            \begin{lstlisting}
+<!ELEMENT element(n1|n2)*>
+            \end{lstlisting}
+            On peut aussi restreindre certaines valeurs, ici on redéfinit le maximum d'éléments :
+            \begin{lstlisting}
+<xsd:ComplexContent>
+  <xsd:restriction base="base">
+    <xsd:sequence>
+      <xsd:element name="elemDeBase"
+        type="xsd:integer" maxOccurs="100"/>
+    </xsd:sequence>
+  <xsd:restriction>
+</xsd:ComplexContent>
+            \end{lstlisting}
+            Pour un \textbf{xsd:string} :
+            \begin{lstlisting}
+<xsd:restriction base="xsd:string">
+  <xsd:enumeration value="value1"/>
+  <xsd:enumeration value="value2"/>
+</xsd:restriction>
+            \end{lstlisting}
+            Enfin le \textbf{xsd:complexType} peut recevoir l'argument :
+            \begin{itemize}
+                \item final=``restriction'' : Restriction impossible;
+                \item final=``derivation'' : Dérivation impossible;
+                \item final=``\#All'' : Les deux.
+            \end{itemize}
+
+        \subsection{Créer un nouveau type}
+            On le structure ainsi :
+            \begin{lstlisting}
+<xsd:simpleType name="nomDuNewType">
+  <xsd:restriction base="xsd:typeDeBase">
+    <xsd:pattern value="regex"/>
+  </xsd:restriction>
+</xsd:simpleType>
+            \end{lstlisting}
+            On doit lui donnée un nom, et un type de base; le plus simple est un String.\\
+            Ensuite, on met un regex pour formaliser. On l'utilise :
+            \begin{lstlisting}[language=XML]
+<xsd:element name="name"
+	type="nomDuNewType"/> 
+            \end{lstlisting}
+            Dans un cas où l'on aurait des bornes de valeurs :
+            \begin{lstlisting}
+<xsd:simpleType name="valAutorise">
+  <xsd:restriction base="xsd:integer">
+    <xsd:minInclusive value="-5"
+        fixed="true"/>
+    <xsd:maxInclusive value="5"/>
+  </xsd:restriction>
+</xsd:simpleType>
+            \end{lstlisting}
+        \subsection{Élément vide}
+            \begin{lstlisting}
+<xsd:element name="rienAvec1Attri">
+  <xsd:complexType>
+    <xsd:attribute name="attribut1"
+        type="xsd:string"/>
+  </xsd:complexType>
+</xsd:element>
+            \end{lstlisting}
+    \section{Formes normales}
+        \begin{itemize}
+            \item \textbf{1NF :} Tous les attributs sont atomiques.
+            \item \textbf{2NF :} Un attribut non clé ne dépend pas d'une partie de la clé.
+            \item \textbf{3NF :} Un attribut non clé ne dépend pas d'un ou plusieurs attributs ne participant pas à la clé.
+            \item \textbf{BCNF :} Tous les attributs non-clé ne sont pas source de dépendance fonctionnelle vers une partie de la clé.
+        \end{itemize}
+
+
+\input{include/foot-document}
+\end{document}

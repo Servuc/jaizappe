@@ -1,0 +1,106 @@
+
+% tout ce qui est apres le % est un  commentaire
+% les elements de mise a jour annuelle sont indiques par
+%%%% MISE A JOUR ANNUELLE
+% les autres elements a mettre a jour sont indiques par
+%%%% MISE A JOUR A CHAQUE FOIS
+% NE PAS MODIFIER LES ESPACES NI LES SAUTS DE LIGNES
+
+% pour saisir des caracteres accentues :
+% soit on dispose d'un editeur qui le permette
+% soit on travaille en 7 bits et on prefixe le caractere
+%      avec \'e Ex \'el\`eve donnera eleve avec des accents
+
+\documentclass[10pt,foldmark,notumble]{leaflet}
+%\usepackage{a4}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{listingsutf8}
+\usepackage{color}
+\usepackage[usenames,x11names]{xcolor}
+\definecolor{citeGray}{HTML}{696969}
+\definecolor{bulletlist}{HTML}{001020}
+\definecolor{section}{HTML}{111111}
+\definecolor{subsection}{HTML}{222222}
+\definecolor{subsubsection}{HTML}{333333}
+\usepackage{fourier}
+\usepackage[top=0cm,bottom=0cm,left=0cm,right=0cm]{geometry}
+\usepackage{caption}
+\usepackage{makeidx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{adjustbox}
+\usepackage{blindtext}
+\usepackage[babel=true]{csquotes}
+\captionsetup{figurewithin=none}
+\captionsetup{tablewithin=none}
+
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1
+}
+
+\usepackage{sectsty}
+\sectionfont{\color{section}{}}
+\subsectionfont{\color{subsection}{}}
+\subsubsectionfont{\color{subsubsection}{}}
+\definecolor{grisFonce}{HTML}{333333}
+\definecolor{grisClair}{HTML}{dddddd}
+\lstset{ %
+  backgroundcolor=\color{grisClair},
+  breaklines=true,
+  language=[LaTeX]{TeX}
+  }
+\usepackage[colorlinks,urlcolor=grisFonce,linkcolor=grisFonce]{hyperref}
+\usepackage{titlesec}
+\titlespacing*{\section}
+  {0.25cm}% decalage a gauche (positif ou negatif)
+  {1ex}% espacement vertical avant
+  {1ex}% espacement vertical apres
+\titlespacing*{\subsection}
+  {0.5cm}% decalage a gauche (positif ou negatif)
+  {1ex}% espacement vertical avant
+  {1ex}% espacement vertical apres
+\titlespacing*{\subsubsection}
+  {0.75cm}% decalage a gauche (positif ou negatif)
+  {1ex}% espacement vertical avant
+  {1ex}% espacement vertical apres
+
+
+
+% modif 19 decembre 2003
+\usepackage[francais]{babel}
+
+%% modif du 25 novemebre 1999
+%http://www.tug.dk/FontCatalogue/dejavusans/
+%\usepackage[T1]{fontenc}
+%\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage[light]{kurier}
+\usepackage[T1]{fontenc}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\title{\#Jaizappé ...}
+\author{Servuc}
+\date{2016}
+
+
+\pdfinfo{%
+  /Title    (\#Jaizappé ...)
+  /Author   (Servuc)
+  /Creator  (Servuc)
+  /Producer (Servuc)
+  /Subject  (Cours)
+  /Keywords ()
+}

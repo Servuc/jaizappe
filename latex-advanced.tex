@@ -1,0 +1,366 @@
+\input{include/base-document}
+\usepackage{chemfig}
+
+\begin{document}
+\fcolorbox{black}{black}{
+\begin{minipage}{\linewidth}
+\begin{center}
+{\Huge{\color{white}\#Jaizappé ...\\... le \LaTeX : Avancé }}
+\end{center}
+\end{minipage}}
+\begin{center}
+    \emph{Ce document est la suite du Jaizappé ... le \LaTeX}.
+\end{center}
+
+\section{Les mathématiques}
+    Il faudra ajouter ceci dans l'entête de votre fichier :
+    \begin{lstlisting}
+\usepackage{amsmath,amsfonts,amssymb}
+    \end{lstlisting}
+    \subsection{Bases}
+        Une équation est encadrée par deux \$. Exemple, $5+3=8$ :
+        \begin{lstlisting}
+$ 5 + 3 = 8 $
+        \end{lstlisting}
+    \subsection{Symbôles}
+        Gauche : La commande, Droite : Le résultat. (Liste non ehxaustive)
+        \begin{center}
+            \begin{tabular}{ l r | l r | l r | l r}
+                + & $+$ & - & ${-}$ & \textbackslash times & $\times$ & / & $/$ \\
+                \textbackslash$\%$ & $\%$ & $=$ & $=$ & \textbackslash ne & $\ne$ & \textbackslash simeq & $\simeq$ \\
+                < & $<$ & \textbackslash leq & $\leq$ & \textbackslash geq & $\geq$ & > & $>$ \\
+                \textbackslash prec & $\prec$ & \textbackslash preceq & $\preceq$ & \textbackslash succeq & $\succeq$ & \textbackslash succ & $\succ$ \\
+                \textbackslash perp & $\perp$ & \textbackslash in & $\in$ & \textbackslash notin & $\notin$ & \textbackslash ni & $\ni$ \\
+                \textbackslash equiv & $\equiv$ & \textbackslash doteq & $\doteq$ & \textbackslash approx & $\approx$ & \textbackslash cong & $\cong$ \\
+                \textbackslash exists & $\exists$ & \textbackslash nexists & $\nexists$ & \textbackslash forall & $\forall$ & \textbackslash neg & $\neg$ \\
+                \textbackslash land & $\land$ & \textbackslash lor & $\lor$ & \textbackslash emptyset & $\emptyset$ & \textbackslash mapsto & $\mapsto$ \\
+                \textbackslash infty & $\infty$ & \textbackslash \{ & $\{$ & \textbackslash backslash & $\backslash$ & \textbackslash \} & $\}$ \\
+                \textbackslash ast & $\ast$ & \textbackslash star & $\star$ & \textbackslash cap & $\cap$ & \textbackslash cup & $\cup$ \\
+                \textbackslash quad & $\quad$ & \textbackslash dots & $\dots$ & \textbackslash pm & $\pm$ & \textbackslash mp & $\mp$ \\
+                \textbackslash vdots & $\vdots$ & \textbackslash ddots & $\ddots$ & \textbackslash cdots & $\cdots$ & \textbackslash ldots & $\ldots$ \\ \\
+            \end{tabular}
+
+            \begin{tabular}{ l r | l r | l r }
+                \textbackslash subset & $\subset$ & \textbackslash subseteq  & $\subseteq$ & \textbackslash nsubseteq & $\nsubseteq$ \\
+                \textbackslash supset & $\supset$ & \textbackslash supseteq  & $\supseteq$ & \textbackslash nsupseteq & $\nsupseteq$ \\
+                \textbackslash sqsubset & $\sqsubset$ & \textbackslash sqsubseteq  & $\sqsubseteq$ & \textbackslash parallel & $\parallel$ \\
+                \textbackslash sqsupset & $\sqsupset$ & \textbackslash sqsupseteq  & $\sqsupseteq$ & \textbackslash nparallel & $\nparallel$ \\
+                \textbackslash sin & $\sin$ & \textbackslash arcsin & $\arcsin$ & \textbackslash sinh & $\sinh$ \\
+                \textbackslash cos & $\cos$ & \textbackslash arccos & $\arccos$ & \textbackslash cosh & $\cosh$ \\
+                \textbackslash tan & $\tan$ & \textbackslash arctan & $\arctan$ & \textbackslash tanh & $\tanh$ \\
+                \textbackslash lim & $\lim$ & \textbackslash ln & $\ln$ & \textbackslash log & $\log$ \\
+                \textbackslash min & $\min$ & \textbackslash max & $\max$ & \textbackslash exp & $\exp$ \\
+                \\
+            \end{tabular}
+
+            \begin{tabular}{ l r | l r }
+                \textbackslash sphericalangle & $\sphericalangle$ & \textbackslash measuredangle & $\measuredangle$ \\
+                \textbackslash uparrow & $\uparrow$ & \textbackslash downarrow & $\downarrow$ \\
+                \textbackslash leftarrow & $\leftarrow$ & \textbackslash rightarrow & $\rightarrow$ \\
+                \textbackslash Uparrow & $\Uparrow$ & \textbackslash Downarrow & $\Downarrow$ \\
+                \textbackslash Leftarrow & $\Leftarrow$ & \textbackslash Rightarrow & $\Rightarrow$ \\
+                \textbackslash Leftrightarrow & $\Leftrightarrow$ & \textbackslash Updownarrow & $\Updownarrow$ \\
+            \end{tabular}
+        \end{center}
+    \subsection{Exposant et indice}
+        Un exposant est précédé par $\hat{ }$ et un indice par \_. Si l'indice ou l'exposant sont de plus de 1 caractère, on les entoure de \{xx\}.\\$5^3=a$, $x_a$, $^n/_m$
+        \begin{lstlisting}
+$ 5^3=a   x_a   ^n/_m $
+        \end{lstlisting}
+        $x_{12}^b$, $x^3_{a_1}$
+        \begin{lstlisting}
+$ x_{12}^b     x^3_{a_1} $
+        \end{lstlisting}
+
+
+
+    \subsection{Fractions et racines}
+        Les fractions sur une ligne : $\frac{5}{x + n} \frac{5}{\frac{x + n}{a}}$, sur plusieurs : $\cfrac{5}{\cfrac{x + n}{a}}$
+        \begin{lstlisting}
+$\frac{5}{x + n} \frac{5}{\frac{x + n}{a}}$
+$\cfrac{5}{\cfrac{x + n}{a}}$
+        \end{lstlisting}
+        Les racines $\sqrt{n} \sqrt[n]{m}$ ($m$ et $n$ peuvent être tout ! : $\sqrt[x^2]{\frac{3}{5_a}}$)
+        \begin{lstlisting}
+$\sqrt{n}   \sqrt[n]{m}$
+        \end{lstlisting}
+
+
+
+    \subsection{Lettres spéciales}
+        Il suffir d'écrire la lettre grecque pour l'obtenir, exemple $\delta, \Delta, \alpha, \Gamma$
+        \begin{lstlisting}
+$\delta  \Delta  \alpha  \Gamma$
+        \end{lstlisting}
+
+        Certaines lettres ont une 3$\up{ème}$ forme : $\varepsilon \vartheta \varkappa \varpi \varrho \varsigma \varphi$
+        \begin{lstlisting}
+$ \varepsilon  \vartheta  \varkappa  \varpi
+ \varrho  \varsigma  \varphi $
+        \end{lstlisting}
+
+        Les ensembles avec : \textbf{\textbackslash mathbb\{X\}}. Exemple, $\mathbb{N}, \mathbb{X}, \mathbb{R}$ :
+        \begin{lstlisting}
+$\mathbb{N}, \mathbb{X}, \mathbb{R}$
+        \end{lstlisting}
+
+        Les lettres grasses et italiques: $\mathbf{A + 5} - b + \mathit{c \times 3}$
+        \begin{lstlisting}
+$\mathbf{A + 5} - b + \mathit{c \times 3}$
+        \end{lstlisting}
+
+        Les lettres calygraphiques : $\mathfrak{A + 5} - b + \mathcal{C \times 3}$
+        \begin{lstlisting}
+$\mathfrak{A + 5} - b + \mathcal{C \times 3}$
+        \end{lstlisting}
+
+
+    \subsection{Les accents}
+        \begin{center}
+            \begin{tabular}{l r | l r | l r }
+                a' & $a'$ & a'' & $a''$ & \textbackslash grave\{a\} & $\grave{a}$ \\
+                a''' & $a'''$ & a'''' & $a''''$ & \textbackslash acute\{a\} & $\acute{a}$ \\
+                \textbackslash dot\{a\} & $\dot{a}$ & \textbackslash ddot\{a\} & $\ddot{a}$ & \textbackslash not\{a\} & $\not{a}$ \\
+                \textbackslash hat\{a\} & $\hat{a}$ & \textbackslash widehat\{a\} & $\widehat{a}$ & \textbackslash vec\{a\} & $\vec{a}$ \\
+                \textbackslash tilde\{a\} & $\tilde{a}$ & \textbackslash widetilde\{a\} & $\widetilde{a}$ & \textbackslash underline\{a\} & $\underline{a}$ \\\\
+            \end{tabular}
+            \begin{tabular}{l r | l r}
+                \textbackslash overrightarrow\{AC\} & $\overrightarrow{AC}$ & \textbackslash overleftarrow\{AC\} & $\overleftarrow{AC}$ \\
+                \textbackslash overbrace\{AC\} & $\overbrace{AC}$ & \textbackslash underbrace\{AC\} & $\underbrace{AC}$ \\
+            \end{tabular}
+        \end{center}
+
+
+
+
+    \subsection{Sommes et intégrales}
+        La commande \textbf{\textbackslash displaystyle} permet un autre affichage : $\sum_{i}^{n} - \displaystyle\sum_{i}^{n}$
+        \begin{lstlisting}
+$\sum_{i}^{n} - \displaystyle\sum_{i}^{n}$
+        \end{lstlisting}
+
+        \begin{center}
+            \begin{tabular}{l r | l r | l r }
+                \textbackslash sum & $\sum$ & \textbackslash int & $\int$ & \textbackslash prod & $\prod$ \\
+                \textbackslash bigcup & $\bigcup$ & \textbackslash bigcap & $\bigcap$ & \textbackslash bigsqcup & $\bigsqcup$ \\
+                \textbackslash iint & $\iint$ & \textbackslash iiint & $\iiint$ & \textbackslash iiiint & $\iiiint$ \\
+                \textbackslash bigoplus & $\bigoplus$ & \textbackslash bigotimes & $\bigotimes$ & \textbackslash bigodot & $\bigodot$ \\
+                \textbackslash coprod & $\coprod$ & \textbackslash bigvee & $\bigvee$ & \textbackslash bigwedge & $\bigwedge$ \\
+            \end{tabular}
+        \end{center}
+
+        On peut superposer si on a plusieurs variables : $\displaystyle\sum_{\substack{i = 1\\j = 1}}^n$
+        \begin{lstlisting}
+$ \displaystyle\sum_{\substack{i=1\\j=1}}^n $
+        \end{lstlisting}
+
+
+
+    \subsection{Matrices}
+        Les matrices $\rightarrow$ comme les tableaux (\textit{tabular}). $\begin{matrix}a & -b\\-c &d\end{matrix}$
+        \begin{lstlisting}
+$\begin{matrix}a & b\\c & d\end{matrix}$
+        \end{lstlisting}
+
+        Pour ajouter des délimiteurs extérieurs (remplace \textit{matrix}):
+        \begin{center}
+            \begin{tabular}{l r | l r | l r | l r | l r }
+                pmatrix & ( ) & bmatrix & $[ ]$ & Bmatrix & $\{ \}$ \\
+            \end{tabular}
+            \begin{tabular}{l r | l r }
+                vmatrix & | | & Vmatrix & || || \\
+            \end{tabular}
+        \end{center}
+        Ajouter des index sur les lignes et colonnes : $\bordermatrix{ ~ & a & b \cr c & 1 & 0 \cr d & 0 & 1 }$
+        \begin{lstlisting}
+$\bordermatrix{ ~&a&b \cr c&1&0 \cr d&0&1}$
+        \end{lstlisting}
+
+
+
+
+
+\section{Beamer : Les présentations}
+    \subsection{Base}
+        Un document \textit{Beamer} est comme un document traditionnel.
+        \begin{lstlisting}
+\documentclass{beamer}
+\begin{document}
+    % Contenu
+\end{document}
+        \end{lstlisting}
+    \subsection{Le thême et couleur}
+        Il suffit avant le \textit{\textbackslash begin\{document\}} :
+        \begin{lstlisting}
+\usetheme{Nom du theme}
+\usetheme{Nom du coloris}
+        \end{lstlisting}
+
+        Les thêmes sont :\\
+        \begin{tabular}{l l l l l}
+            Antibes & Bergen & Berkeley & Berlin & Ilmenau\\
+            Darmstadt & Copenhagen & Frankfurt & Goettingen & Warsaw\\
+            Dresden & JuanLesPins & Luebeck & Madrid & Malmoe\\
+            Marburg & Montpellier & PaloAlto & Pittsburgh & boxes\\
+            Singapore & Szeged & Hannover & Rochester & default\\\\
+        \end{tabular}
+
+        Les coloris sont :\\
+        \begin{tabular}{l l l l l}
+            default & albatross & beaver & beetle & crane\\
+            dolphin & dove & fly & lily & orchid\\
+            rose & seagull & seahorse & whale & wolverine\\
+        \end{tabular}
+
+
+    \subsection{Diapositive (Frame)}
+        Une diapo. est créée avec :
+        \begin{lstlisting}
+\frame{
+    \frametitle{Titre de la diapo}
+    Contenu !\pause
+    \begin{itemize}
+        \item Item A\pause
+        \item Item B
+    \end{itemize}
+}
+        \end{lstlisting}
+
+        Le \textit{\textbackslash pause} permet de stopper l'affichage du texte dans une \textit{frame}.\\
+        Le contenu s'ajoute comment en \LaTeX $\;$normal.\\
+        Seuls les \textit{section} et autres se font hors des \textit{frame} (juste avant).\\
+        Suivant les thêmes, le sommaire est placé en haut ou sur le côté.
+
+
+    \subsection{La première page}
+        Il suffit de rendre le para-texte inexistant sur cette diapo.
+        \begin{lstlisting}
+{
+\setbeamertemplate{footline}{} % Efface
+\setbeamertemplate{headline}{} % Para-texte
+\begin{frame}
+    % Contenu
+    \titlepage % Pratique
+\end{frame}
+}
+\addtocounter{framenumber}{-1} % Corrige total
+        \end{lstlisting}
+
+    \subsection{Un meilleur pied de diapositive}
+        Cette commande se place avant \textit{\textbackslash begin\{document\}}
+        \begin{lstlisting}
+\setbeamertemplate{footline}{
+ \hspace*{.5cm}\scriptsize{
+   \insertshorttitle$\quad$-$\quad$\insertauthor
+   \hspace*{50pt} \hfill \insertframenumber /
+   \inserttotalframenumber\hspace{0.6cm}
+   } \\ \vspace{9pt} }
+        \end{lstlisting}
+
+
+    \subsection{Boites de contenu}
+        Il est possible de mettre en avant des informations grâce à des boites avec des couleurs en accords avec leur importance :
+        \begin{lstlisting}
+\frame{
+    \frametitle{Titre de la diapo}
+    \begin{block}{Titre}
+    IMPORTANT
+    \end{block}
+
+    \begin{alertblock}{Titre}
+    ATTENTION
+    \end{alertblock}
+
+    \begin{exampleblock}{Titre}
+    EXEMPLE
+    \end{exampleblock}
+}
+        \end{lstlisting}
+
+    \subsection{Plusieurs colonnes}
+        Il suffit d'utiliser les commandes \textit{\textbackslash columns} et \textit{\textbackslash column} :
+        \begin{lstlisting}
+\frame{
+    \frametitle{Titre de la diapo}
+    \begin{columns}[T]
+        \begin{column}[T]{5cm}
+            % Contenu
+        \end{column}
+        \begin{column}[T]{5cm}
+            % Contenu
+        \end{column}
+    \end{columns}
+}
+        \end{lstlisting}
+
+\section{Chimie}
+    Très utile au niveau universitaire, simple d'utilisation.\\
+    Il suffit d'ajouter le package :
+    \begin{lstlisting}
+\usepackage{chemfig}
+    \end{lstlisting}
+    \subsection{Les liaisons}
+        Les liaisons sont définis par un ou deux symbôle(s) :
+        \begin{center}
+            \begin{tabular}{l r | l r}
+                \textbackslash chemfig\{A-B\} & \chemfig{A-B} & \textbackslash chemfig\{A=B\} & \chemfig{A=B} \\
+                 \textbackslash chemfig\{A>B\} & \chemfig{A>B} & \textbackslash chemfig\{A<B\} & \chemfig{A<B} \\
+                \textbackslash chemfig\{A$>:$B\} & \chemfig{A>:B} & \textbackslash chemfig\{A$<:$B\} & \chemfig{A<:B} \\
+                \textbackslash chemfig\{A>|B\} & \chemfig{A>|B} & \textbackslash chemfig\{A<|B\} & \chemfig{A<|B} \\
+                \textbackslash chemfig\{A$\sim$B\} & \chemfig{A~B} & & \\
+            \end{tabular}
+        \end{center}
+
+
+    \subsection{Les angles des liaisons}
+        Un angle de liaison est définit par $L[:A]$, $L$ liaison et $A$ angle.\\
+        On ajoute une lettre pour la molécules avec $L[:A]E$, $E$ l'élément.
+        \begin{center}
+            \chemfig{H-[:30]O-[:-30]H}
+        \end{center}
+        \begin{lstlisting}
+\chemfig{H-[:30]O-[:-30]H}
+        \end{lstlisting}
+        On entoure de ( ) pour indiquer un ensemble :
+        \begin{center}
+            \chemfig{C(-[:0]N(-[:-45]H)(-[:45]H))(-[:90]H)(-[:180]N(=[:180]O))(-[:270]H)}
+        \end{center}
+        \begin{lstlisting}
+\chemfig{C(-[:0]N(-[:-45]H)(-[:45]H))
+    (-[:90]H)(-[:180]N(=[:180]O))(-[:270]H)}
+        \end{lstlisting}
+
+
+    \subsection{Les cycles}
+        Il suffit de mettre la molécule principale $\ast$ la taille du cycle, puis les liaisons :
+        \begin{center}
+            \chemfig{O*3(-O-O-)}
+        \end{center}
+        \begin{lstlisting}
+\chemfig{O*3(-O-O-)}
+        \end{lstlisting}
+
+
+
+    \subsection{Les ions}
+        Il suffit d'ajouter $\hat{ }\{+\}$ ou $\hat{ }\{-\}$ ou $\hat{ }\{\backslash oplus\}$ ou $\hat{ }\{\backslash ominus\}$ après $E$, la molécule.
+        \begin{center}
+            \chemfig{O^{-}(-[:0]H)}
+        \end{center}
+        \begin{lstlisting}
+\chemfig{O^{-}(-[:0]H)}
+        \end{lstlisting}
+
+    \subsection{Représentation de Lewis}
+        La syntaxe est : $\backslash\{<1n>\dots<in>,E\}$ avec $1 <= i <= 8$ qui représente les 8 emplacements. Et $E$ la molécule.\\
+        Chaque $n$ de $<in>$ peut être $.$ ou $:$ pour $1$ ou $2$ électrons.\\
+        Il faut seulement mettre les $<in>$ utiles.
+        \begin{center}
+            \chemfig{\lewis{2:6:,O}(-[:0]H)(-[:180]H)}
+        \end{center}
+        \begin{lstlisting}
+\chemfig{\lewis{2:6:,O}(-[:0]H)(-[:180]H)}
+        \end{lstlisting}
+
+\input{include/foot-document}
+\end{document}

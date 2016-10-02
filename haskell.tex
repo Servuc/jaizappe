@@ -1,0 +1,310 @@
+\input{include/base-document}
+
+
+\begin{document}
+    \fcolorbox{black}{black}{
+    \begin{minipage}{\linewidth}
+        \begin{center}
+            {\Huge{\color{white}\#Jaizappé ...\\... le Haskell}}
+        \end{center}
+    \end{minipage}}
+    \section{Histoire}
+        \textbf{Haskell} est un langage de programmation fonctionnel créé en 1990. Il est sert au $\lambda$-calcul et au calcul combinatoire. Il s'éxécute avec \textbf{ghci} et des fichiers en $.hs$.
+    \section{Bases}
+        \subsection{Commentaires}
+            Un commentaire est un message caché à l'exécution.
+            \begin{lstlisting}[language=Haskell]
+-- commentaire sur 1 lignes
+{- commentaire sur 1 ou + -}
+            \end{lstlisting}
+        \subsection{Arithmétique}
+            On a les opérateurs : $+ - \times \setminus$ :
+            \begin{lstlisting}[language=Haskell]
+ghci> 5 * 4 - (3 + 2) / 1
+15.0
+            \end{lstlisting}
+            \begin{lstlisting}[language=Haskell]
+succ 5 -- incrémente
+pred 5 -- décrémente
+            \end{lstlisting}
+            \begin{lstlisting}[language=Haskell]
+max 5 4 -- retourne 5
+min 5 4 -- retourne 4
+            \end{lstlisting}
+        \subsection{Booléen}
+            On a les opérateurs : \textit{True False not \&\& ||} :
+            \begin{lstlisting}[language=Haskell]
+ghci> True && not ( False || True)
+False
+            \end{lstlisting}
+            Et pour les nombres et chaines : \textit{== /=} :
+            \begin{lstlisting}[language=Haskell]
+5 /= 4         -- True
+5 == 5         -- True
+"lol" == "xD"  -- False
+            \end{lstlisting}
+            Les chaines sont entourés par des doubles quotes !
+        \subsection{Charger un fichier}
+            Un fichier permet d'omettre les \textbf{let} :
+            \begin{lstlisting}[language=Haskell]
+:l monFichier    -- Charge le fichier
+:reload          -- Recharge le fichier
+            \end{lstlisting}
+            \section{Fonctions}
+        \subsection{Appel d'une fonction}
+            \begin{lstlisting}[language=Haskell]
+bar 3 "lol" 5.34
+bar (3, "lol", 5.34)
+            \end{lstlisting}
+        \subsection{Définition d'une fonction}
+            \begin{lstlisting}[language=Haskell]
+carre x = x * x -- fait le carré
+func x = if(x > 5) then x - 5 else x + 5
+{- Si param x > 5, retourne x - 5
+   Sinon retourne x + 5             -}
+   
+somme x y z = x + y + z
+somme 1 2 3 -- 6
+            \end{lstlisting}
+        \subsection{Fonction avec valeurs prédéfinies}
+            \begin{lstlisting}[language=Haskell]
+fonc 1 = "Unité"
+fonc 10 = "Dizaine"
+fonc x = "N/A"
+            \end{lstlisting}
+        \subsection{Fonction récursive}
+            \begin{lstlisting}[language=Haskell]
+fonc 0 = 0
+fonc x = x + fonc(x - 1)
+            \end{lstlisting}
+        \subsection{Fonction $\lambda$ (anonyme)}
+            Précédé par $\setminus$ et sans nom :
+            \begin{lstlisting}[language=Haskell]
+carre ((\a -> a + 2) 3) -- 25
+            \end{lstlisting}
+            Ici, à usage unique, on augmente de 2 le paramètre.
+            \begin{lstlisting}[language=Haskell]
+(\a b c -> ....) -- usage avec param > 1
+            \end{lstlisting}
+        \subsection{Fonction $\$$ (joker)}
+            \begin{lstlisting}[language=Haskell]
+map ($5) [(carre), (*5)] -- [25,25]
+            \end{lstlisting}
+            Ou sert à calculer les paramètres :
+            \begin{lstlisting}[language=Haskell]
+length $ [1,2] ++ [3,4] -- 4
+            \end{lstlisting}
+        \subsection{Composition de fonction}
+            L'exemple fait le carré puis la racine :
+            \begin{lstlisting}
+map (sqrt . carre) [5,3,9]
+[5.0,3.0,9.0]
+            \end{lstlisting}
+
+
+
+
+    \section{Types}
+        \subsection{Base}
+            Pour récupérer le type de quelques choses :
+            \begin{lstlisting}[language=Haskell]
+:t x
+            \end{lstlisting}
+        \subsection{Définition de type}
+            \begin{lstlisting}[language=Haskell]
+data NewType = value|value
+data Coul = RGB Int Int Int deriving Show
+:t RGB -- RGB :: Int -> Int -> Int -> Coul
+data Arbre a = ArbreVide |
+  Arbre {noeud::a, fg::Arbre a, fd::Arbre a}
+  deriving Show
+:t Arbre
+--Arbre::a -> Arbre a -> Arbre a -> Arbre a
+            \end{lstlisting}
+            Le dernier cas nous donne les accesseurs directement !\\Sinon, on peut le faire manuellement :
+            \begin{lstlisting}
+composanteRouge (RGB r _ _) = r
+            \end{lstlisting}
+        \subsection{Classe de type}
+            \begin{lstlisting}
+class MonEgal a where
+	egal :: a -> a -> Bool
+	diff :: a -> a -> Bool
+	diff x y = not(egal x y)
+	egal x y = not(diff x y)
+data MonType = V1|V2
+instance MonEgal Coul where
+	egal V1 V1 = True
+	egal V2 V2 = True
+	egal _ _ = True
+instance Show MonType where
+	show V1 = "valeur 1"
+	show V2 = "valeur 2"
+            \end{lstlisting}
+
+    \section{Variables et listes}
+        \subsection{Bases}
+            \begin{lstlisting}[language=Haskell]
+let a = 3 -- met 3 dans a
+let b = [3, 5, 6] -- met une liste dans b
+let c = [] -- liste vide
+            \end{lstlisting}
+            On peut mettre une liste dans une liste :
+            \begin{lstlisting}[language=Haskell]
+['l'] ++ ['o', 'l'] -- == "l" ++ "ol"
+[4, 3] ++ [2, 1]    -- == [4, 3, 2, 1]
+5:[4, 3, 2, 1]      -- optimiser
+            \end{lstlisting}
+            De même une chaine est une liste :
+            \begin{lstlisting}[language=Haskell]
+"lol" -- équivaut ['l', 'o', 'l']
+'l':"ol" -- pour 1 élément (optimiser)
+            \end{lstlisting}
+        \subsection{Opérations}
+            L'opérateur \textbf{!!} sert à prendre l'élément en X :
+            \begin{lstlisting}[language=Haskell]
+[4, 3, 2, 1] !! 2 -- retourne 2
+            \end{lstlisting}
+            Opérations : \textbf{< <= => > == /=},\\
+            Suit l'ordre des cases :
+            \begin{lstlisting}[language=Haskell]
+[3, 2, 1] > [4, 2, 1] -- False
+[3, 2, 1] > [3, 2]    -- True
+            \end{lstlisting}
+            Sélections précises :
+            \begin{lstlisting}[language=Haskell]
+head [9, 7, 5, 3] -- 9
+tail [9, 7, 5, 3] -- [7, 5, 3]
+init [9, 7, 5, 3] -- [9, 7, 5]
+last [9, 7, 5, 3] -- 3
+            \end{lstlisting}
+            Fonctions sur les listes :
+            \begin{lstlisting}[language=Haskell]
+null [] -- True (car pas d'élément)
+drop 2 [9, 7, 5, 3]  -- [5, 3]
+elem 1 [5, 9, 3, 7]  -- False (non trouvé)
+zip [1, 4] "hi"      -- [('h',1),('i',4)]
+            \end{lstlisting}
+            Il y a aussi \textit{maximum}, \textit{minimum}, \textit{sum}, \textit{product}, \textit{length} et \textit{reverse}.
+            Faire des listes préfabriquées :
+            \begin{lstlisting}[language=Haskell]
+[1..31]       -- De 1 à 31, idem avec lettre
+[0..]         -- 0 à infini
+[2,4..9]      -- [2,4,6,8]
+cycle [1,2]   -- [1,2,1,2,...]
+take 5 [1,2]  -- [1,2,1,2,1]
+take 2 [9, 7, 5, 3]  -- [9, 7]
+replicate 2 4 -- [4,4]
+            \end{lstlisting}
+            On peut même faire des ensembles :
+            \begin{lstlisting}[language=Haskell]
+[x+3 | x <- [1..4]] -- [4,5,6,7]
+            \end{lstlisting}
+            Même avec du code :
+            \begin{lstlisting}[language=Haskell]
+[if x == 5 then "o" else "L"|x<-[3..7],odd x]
+-- ["L", "o", "L"]
+            \end{lstlisting}
+            On peut faire \textbf{import Data.List} dans le prélude :
+            \begin{lstlisting}[language=Haskell]
+intersperse 4 [5, 7, 2]-- [5, 4, 7, 4, 2]
+--intercalate : idem mais avec listes
+transpose [[1,2],[3,4]] -- [[1,3],[2,4]]
+concat [[1,2],[3,4]]    -- [1,2,3,4]
+            \end{lstlisting}
+            Mots clés utiles :
+            \begin{lstlisting}[language=Haskell]
+and $ map (/=4) [1,2,3]   -- True
+or $ map (<4) [1,2,3,4]   -- True
+all $ map (/=4) [1,2,3]   -- True
+any $ map (==4) [1,2,3]   -- False
+            \end{lstlisting}
+            Et d'autres fonctions utiles :
+            \begin{lstlisting}[language=Haskell]
+splitAt 2 [1,2,3,4]   -- ([1,2],[3,4])
+splitAt 2 "cool"      -- ("co","ol")
+takeWhile (<3) [1,2,3,4] -- [1,2]
+dropWhile (<3) [1,2,3,4] -- [3,4]
+break (==3) [1,2,3,4] -- ([1,2],[3,4])
+span (/=3) [1,2,3,4]  -- ([1,2],[3,4])
+inits "lol" -- ["","l","lo","lol"]
+tails "lol" -- ["lol","ol","l",""]
+            \end{lstlisting}
+            Nous avons aussi la calculatrice polonaise :
+            \begin{lstlisting}[language=Haskell]
+solveRPN "2 3 +" -- 6
+            \end{lstlisting}
+
+    \section{Modules}
+        Un module contient des fonctions, des types.\\
+        Pour importer \textit{Data.List}, deux méthodes :
+        \begin{lstlisting}[language=Haskell]
+import Data.List   -- Dans fichier
+:m + Data.List     -- Dans interpréteur
+        \end{lstlisting}
+        De même, on peut restreindre l'import (\textit{hiding} = mais pas)
+        \begin{lstlisting}[language=Haskell]
+import Module.X (fonc1, fonc2)
+import Module.X hiding (fonc1, fonc2)
+        \end{lstlisting}
+    \section{Maybe}
+        \textbf{Maybe} fait office d'exception :
+        \begin{lstlisting}[language=Haskell]
+let f a b = if b == 0 then Nothing
+		else Just (div a b)
+fmap (\x -> x + 4) (f 4 2)
+Just 6
+        \end{lstlisting}
+    \section{Functor applicatif}
+        Il faut importer \textbf{import Control.Applicative},\\
+        Type du \textit{functor applicatif} :
+        \begin{lstlisting}[language=Haskell]
+(<*>)::Applicative f=>f(a -> b)-> f a -> f b 
+        \end{lstlisting}
+        Exemples :
+        \begin{lstlisting}[language=Haskell]
+[\x -> x+1, \ x -> x*2] <*> [2 ,4]
+    -- [3, 5, 4, 8]
+[ ( * ) ] <*> [1, 2, 3] <*> [4, 5]
+    -- [4, 5, 8, 10, 12, 15]
+        \end{lstlisting}
+        Et pour le type \textit{Maybe} :
+        \begin{lstlisting}[language=Haskell]
+Just ( * 3 ) <*> Just 4 -- Just 12
+        \end{lstlisting}
+    \section{Les monades}
+        Les monades servent à faire des calculs tout en se protégeant des \textit{null}, ces valeurs valent alors \textit{Nothing}.
+        \begin{lstlisting}[language=Haskell]
+: t (>>=)
+(>>=) :: Monad m => m a->( a -> m b )->m b
+        \end{lstlisting}
+        Exemple :
+        \begin{lstlisting}[language=Haskell]
+[ 2 .. 4] >>= ( \ x -> [ 0 .. x ] )
+--[0 ,1 ,2 ,0 ,1 ,2 ,3 ,0 ,1 ,2 ,3 ,4 ]
+Nothing >> Just 4 -- Nothing
+Just 3 >> Nothing -- Nothing
+Just 3 >> Just 4  -- Just 4
+Just 4 >> Just 3  -- Just 3
+        \end{lstlisting}
+    \section{Les monoïdes}
+        C'est un élément munie d'une loi de composition interne ainsi que d'un élément neutre :
+        \begin{lstlisting}
+import Data.Monoid
+Just(Sum 2) `mappend` Just (Sum 3)
+-- Just (Sum {getSum = 5})
+Just(Sum 2) `mappend` Nothing
+-- Just (Sum {getSum = 2})
+        \end{lstlisting}
+        Une LCI prend en compte que les éléments sous symétriques, commutatifs et associatifs.
+        \begin{lstlisting}
+Just 2 >>= (\x -> guard(x > 1)) >> Just 3
+	-- Just 3
+Just 0 >>= (\x -> guard(x > 1)) >> Just 3
+	-- Nothing
+        \end{lstlisting}
+        \textit{Maybe a} est un monoïde si \textit{a} est un monoïde.
+
+
+\input{include/foot-document}
+\end{document}

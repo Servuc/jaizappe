@@ -1,0 +1,329 @@
+\input{include/base-document}
+
+\begin{document}
+    \fcolorbox{black}{black}{
+    \begin{minipage}{\linewidth}
+        \begin{center}
+            {\Huge{\color{white}\#Jaizappé ...\\... l'Octave}}
+        \end{center}
+    \end{minipage}}
+
+    \section{Histoire}
+        \textbf{Octave} est un projet \textbf{GNU}. Apparu au début des années 90. Ce projet est maintenu et développé par \textbf{John W. Eaton}.\\
+        \textbf{Octave} peut exécuter des scripts MatLab, ainsi que du code C++ compilé ($^*.oct$). Un script Octave est suffixé en $.m$.
+    \section{Bases}
+        \subsection{Commentaire}
+            Un commentaire est un message caché à l'exécution.
+            \begin{lstlisting}[language=Octave]
+%Ceci est un commentaire
+            \end{lstlisting}
+        \subsection{Afficher du texte}
+            Pour afficher du texte ou des données, on dispose de \textbf{disp} (Le résultat est mis en commentaire et \textit{ans} signifie \textit{réponse}) :
+            \begin{lstlisting}[language=Octave]
+disp('Mon texte'); % Mon texte
+maVariable = 4     % ans = 4
+MAVARIABLE = 4     % ans = 4
+c = 3 + 1          % ans = 4
+disp(maVariable);  % 4
+            \end{lstlisting}
+        \subsection{Demander une valeur}
+            \begin{lstlisting}[language=Octave]
+a = input('Entrer la valeur de a :');
+s = input('Entrer une chaine :', 's');
+            \end{lstlisting}
+        \subsection{Calculs basiques}
+            \begin{lstlisting}[language=Octave]
+a = 5 + 1; %addition
+b = a * 3; %multiplication
+c = b - 6; %soustraction
+d = c / 1; %division
+e = d ^ 3; %exposant
+            \end{lstlisting}
+            De même, on dispose de valeurs de référence :
+            \begin{itemize}
+                \item \textbf{pi} : $3.14$
+                \item \textbf{i} : Imaginaire $\sqrt{-1} = 1$
+                \item \textbf{e} : Nombre d'Euler
+                \item \textbf{inf} : Infini
+                \item \textbf{NaN} : Not a Number
+            \end{itemize}
+            Ainsi que des fonctions indispensables :
+            \begin{center}
+                \begin{tabular}{| l | c |}
+                    \hline
+                    Description & Commande \\
+                    \hline
+                    Modulo de $x$ par $y$ & mod(x,y); \\
+                    Cos, Sin, Tan & cos(x); sin(x); tan(x);\\
+                    Les arcs & acos(x); asin(x); atan(x); \\
+                    Exp., Log et Log$_{10}$ & exp(x); log(x); et log10(x);  \\
+                    Val. abs. et Racine & abs(x); sqrt(x);\\
+                    Arrondi, $\nearrow$ et $\searrow$ & round(x); ceil(x); et floor(x);\\
+                    Aléatoire & rand;\\
+                    \hline
+                \end{tabular}
+            \end{center}
+    \section{Vecteurs et matrices}
+        \subsection{Déclaration}
+            Déclarations manuelles des valeurs :
+            \begin{lstlisting}[language=Octave]
+%Un vecteur
+v1 = [0 1 2 3];
+v2 = 1:10   % debut:fin
+v3 = 1:2:10 % debut:pas:fin
+%Une matrice
+m = [0 1;2 3];
+            \end{lstlisting}
+            Déclarations programmées :
+            \begin{center}
+                \begin{tabular}{| l | c |}
+                    \hline
+                    Description & Commande \\
+                    \hline
+                    Transposé de A et trace & A'; trace(A);\\
+                    Mat. aléa. de $n\times n$ et $n\times m$ & rand(n); rand(n,m);\\
+                    Matrice de 1 & ones(n); ou ones(n,m);\\
+                    Matrice de 0 & zeros(n); ou zeros(n,m);\\
+                    Mat. de 0 et diag. à 1 & eye(n);\\
+                    Vect. de $a$ à $b$ à $n$ élém. & linspace(a, b, n);\\
+                    Vect. de $10^a$ à $10^b$ à $n$ élém. & logspace(a, b, n);\\
+                    Vect. et Mat. diag. de A & diag(A); et diag(diag(A));\\
+                    \hline
+                \end{tabular}
+            \end{center}
+        \subsection{Calculs basiques}
+            On peut calculer élément par élément : $C_{ij} = A_{ij} \bigstar B_{ij}$, il suffit de préfixer $+$, $*$, $-$, $/$ et $\hat{ }$ d'un point :
+            \begin{lstlisting}[language=Octave]
+C = A .+ B
+            \end{lstlisting}
+            Opération entre deux matrices :
+            \begin{lstlisting}[language=Octave]
+C = A + B
+            \end{lstlisting}
+        \subsection{Manipulation de matrices}
+            Modifier la taille d'une matrice, \textit{e.g.} $2\times 3 \rightarrow 1\times 6$ :
+            \begin{lstlisting}[language=Octave]
+A = rand(2,3);     % 2 lignes, 3 colonnes
+B = reshape(A,1,6);% 1 ligne, 6 colonnes
+            \end{lstlisting}
+            Pour ordonner un vecteur :
+            \begin{lstlisting}[language=Octave]
+A = sort(A); % Tri dans l'ordre croissant
+            \end{lstlisting}
+            Pour faire des rotations matricielles :
+            \begin{lstlisting}[language=Octave]
+A = rot90(A);    % Rotation de 90 deg.
+A = rot90(A, -2);% Rotation de -180 deg.
+            \end{lstlisting}
+            Récupérer des valeurs :
+            \begin{lstlisting}[language=Octave]
+B = A(2,3)    % Récupère la val. en 2 3
+C = A(2,[1,3])% Récupère en 2 1 et 2 3
+D = A(:,3)    % Récupère la colonne 3
+E = A(2,:)    % Récupère la ligne 2
+            \end{lstlisting}
+            Ajouter des vecteurs et matrices ensemble,\\Par exemple on veut une matrice $5\times 5$ :
+            \begin{lstlisting}[language=Octave]
+A11 = rand(2,2);A12 = rand(2,3);
+A21 = rand(3,2);A22 = rand(3,3);
+A = [A11 A12; A21 A22];
+            \end{lstlisting}
+            Pour obtenir la matrice triangulaire ...
+            \begin{lstlisting}[language=Octave]
+B = tril(A);   % ... inférieur
+C = triu(A);   % ... supérieur
+[L,U] = lu(A); % Décomposition LU
+[Q,R] = qr(A); % Décomposition QR
+            \end{lstlisting}
+
+            Inverse, déterminant d'une matrice carrée :
+            \begin{lstlisting}[language=Octave]
+AA = inv(A);
+b = det(A);
+            \end{lstlisting}
+            Norme et conditionnement d'un vecteur ou d'une matrice :
+            \begin{lstlisting}[language=Octave]
+c = norm(A); 
+d = cond(A); % norm(A) * norm(inv(A))
+            \end{lstlisting}
+            Valeurs propres et vecteur diagonale :
+            \begin{lstlisting}[language=Octave]
+[VectPro, Diag] = eig(A);
+            \end{lstlisting}
+    \section{Graphiques}
+        Pour afficher un graphique 2D, on utilise :
+        \begin{lstlisting}[language=Octave]
+title('Mon titre');          %facultatif
+label('label Y', 'label X'); %facultatif
+plot(myData(:,1), myData(:,2));
+figure; %sert à afficher la fenetre
+        \end{lstlisting}
+        Si l'on veut 2 séries de données :
+        \begin{lstlisting}[language=Octave]
+hold on %prends 2 séries à la fois
+plot(myData(:,1), myData(:,2));
+plot(myData(:,1), myData(:,3));
+figure; 
+        \end{lstlisting}
+        On peut dessiner des grilles :
+        \begin{lstlisting}[language=Octave]
+[X,Y] = meshgrid(debut:pas:fin);
+        \end{lstlisting}
+        On peut personnaliser le graphique avec des options :
+        \begin{center}
+            \begin{tabular}{| c | c ||  c | c || c | c |}
+                \hline
+                Descri. & Arg. & Descri. & Arg. & Descri. & Arg.\\
+                \hline
+                Noir & k & Rouge & r & Vert & g\\
+                Bleu & b & Magenta & m & Cyan & c\\
+                \hline
+                Croix & + x & Rond & o & Étoile & *\\
+                Point & . & Carré & s & Diamant & d\\
+                $\bigtriangleup$ $\bigtriangledown$ $\lhd$ $\rhd$ & $\hat{ }$ v $< >$ & Pent. & p & Hexa. & h\\
+                \hline
+            \end{tabular}
+        \end{center}
+        \begin{lstlisting}[language=Octave]
+plot(myData(:,2), myData(:,3), 'ro');
+figure;
+        \end{lstlisting}
+        On a aussi :
+        \begin{itemize}
+            \item bar(...); et barh(...); : Histogramme et Histo. Horizon.;
+            \item semilogx(...); semilogy(...); : Log sur $X$ ou $Y$;
+            \item loglog(...); : Log sur $X$ et $Y$;
+        \end{itemize}
+        Dessin d'une fonction sur pointeur :
+        \begin{lstlisting}[language=Octave]
+myFonc = @fonction; % e.g. @sin
+fplot(myFonc, [limit1,limit2]); %3eme arg :
+figure;                   %couleur et forme
+        \end{lstlisting}
+        \subsection{Sous-graphique}
+            \begin{lstlisting}
+subplot(1,2,1); %ligne, col, index
+plot([0:10], sin([0:10]));
+subplot(1,2,2); %ligne, col, index
+plot([0:10], cos([0:10]));
+figure;
+            \end{lstlisting}
+
+    \section{Polynômes}
+        \subsection{Déclaration}
+            Un polynôme se déclare par ses valeurs tel un vecteur,
+            \textit{e.g. :} $-4x^4 -x^3 + 3x + 2$ :
+            \begin{lstlisting}
+p = [-1, 0, 3, 2];
+polyout(p, 'x')
+% ans = - 1*x^3 + 0*x^2 + 3*x^1 + 2
+            \end{lstlisting}
+            Racine, dérivée et intégration :
+            \begin{lstlisting}
+q1 = roots(p);
+q2 = polyder(p);
+q3 = polyint(p);
+            \end{lstlisting}
+            Multiplication et division polynômiale :
+            \begin{lstlisting}
+result = conv(p, q)
+[b, r] = deconv(y, a) % y = ab + r
+            \end{lstlisting}
+    \section{Scripts}
+        \subsection{Lire un fichier}
+            Le fichier doit se présenter sous forme \textit{CSV} avec l'espace comme séparateur. On obtient une matrice :
+            \begin{lstlisting}
+myData = dlmread('donnees.txt');
+            \end{lstlisting}
+        \subsection{Conditions}
+            \begin{lstlisting}
+if (condition)
+	%instructions
+elseif (condition)
+	%instructions
+else
+	%instructions
+end
+            \end{lstlisting}
+        \subsection{Boucles}
+            On a la boucle \textbf{for} qui prend en argument une série :
+            \begin{lstlisting}
+for cpt = debut:fin %Le pas est possible
+	%instructions
+end
+
+for val = sort(rand(1,8));
+	%instructions
+end
+            \end{lstlisting}
+            La boucle \textbf{while} et \textbf{do-while}:
+            \begin{lstlisting}
+while (x < 5)
+	%instructions
+end
+
+do
+	%instructions
+until (x < 5)
+            \end{lstlisting}
+            Bien sûr, les instructions \textbf{continue} et \textbf{break} fonctionnent.
+        \subsection{Fonctions}
+            Elles sont à définir au DÉBUT.\\
+            Ci-dessous, \textit{valueX} sont des valeurs de retours et \textit{argX} les arguments.
+            \begin{lstlisting}
+function [value1[, value2, ...]]
+= name( [arg1[, arg2, ...]] )
+    value1 = ... % pour le retour
+    return; % pour sortir de la fonction
+endfunction
+            \end{lstlisting}
+            Il y a aussi les fonctions anonymes, qui sont des fonctions sans nom stockées dans une variable.
+            \begin{lstlisting}
+f = @(x) x*x % soit x au carré
+f(2)         % retourne 4 
+arrayfun(f, [2 3 4]) % appel du C
+% ou Fortran dans le cas vecteur !
+            \end{lstlisting}
+    \section{Algèbres}
+        Calcul d'une intégrale, il faut mettre la fonction en pointeur et renseigner les limites :
+        \begin{lstlisting}[language=Octave]
+myFonc = @uneFonction; % e.g. @sin
+quad(myFonc,0,pi); % fonc, début, fin
+        \end{lstlisting}
+        Calcule d'une valeur :
+        \begin{lstlisting}[language=Octave]
+myFonc = @uneFonction; % e.g. @sin
+feval(myFonc, arg); % fonc, valeur
+%On peut aussi faire
+myFonc(arg);
+        \end{lstlisting}
+        On peut analyser une fonction :
+        \begin{lstlisting}[language=Octave]
+s = input('Entrez une fonction :','s');
+myFonc = inline(s);
+        \end{lstlisting}
+    \section{Équations différentielles}
+        On a dans le cas de \textbf{Lorentz} :
+        \begin{itemize}
+            \item $\frac{dx}{dt} = a(y(t)-x(t))$
+            \item $\frac{dy}{dt} = cx(t) - x(t)z(t) - y(t)$
+            \item $\frac{dz}{dt} = x(t)y(t) - bz(t)$
+        \end{itemize}
+
+        \begin{lstlisting}[language=Octave]
+function [f] = lorentz(u,t)
+	a = 10; b = 8/3; c = 28;
+	f(1) = a * (u(2) - u(1));
+	f(2) = c * u(1) - u(1) * u(3) - u(2);
+	f(3) = u(1) * u(2) - b * u(3);
+endfunction
+t = linspace(0,50,1001);
+initVal = [1; 1; 1];
+[myRes] = lsode('lorentz', initVal, t);
+plot3(myRes(:,1), myRes(:,2), myRes(:,3));
+figure;
+        \end{lstlisting}
+
+
+    \input{include/foot-document}
+\end{document}

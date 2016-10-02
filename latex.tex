@@ -1,0 +1,308 @@
+\input{include/base-document}
+
+\begin{document}
+    \fcolorbox{black}{black}{
+    \begin{minipage}{\linewidth}
+        \begin{center}
+            {\Huge{\color{white}\#Jaizappé ...\\... le \LaTeX}}
+        \end{center}
+    \end{minipage}}
+    \section{Histoire}
+        Le \LaTeX ([lat$\epsilon$k]) est un langage de création de documents, créé en 1983 par \textit{Leslie Lamport}. Les fichiers sont en \textit{.tex}.
+    \section{Bases}
+        \subsection{Code minimal}
+            \begin{lstlisting}
+\documentclass{article}
+\usepackage[french]{babel} % Français
+\usepackage[utf8]{inputenc}  % Accents
+% En-tête, Ceci est un commentaire
+\begin{document}
+  % Contenu du document
+\end{document}
+            \end{lstlisting}
+        \subsection{Classes de documents}
+            Définit comment le document sera formé à sa compilation.
+            \begin{itemize}
+                \item \textbf{article} : Petit document sans chapitres;
+                \item \textbf{report} : Document moyen, ajout de \textit{\textbackslash chapter};
+                \item \textbf{book} et \textbf{memoir} : Idem que \textit{report};
+                \item \textbf{letter} : Pour le courrier;
+                \item \textbf{IEEEtran} : Pour les articles formatés pour les IEEE;
+                \item \textbf{slider} et \textbf{beamer} : Présentations (non traités ici);
+                \item \textbf{leaflet} : Flyer (comme ce document);
+                \item \textbf{minimal} : Le strict minimum (peu pratique).
+            \end{itemize}
+            La classe peut être précédée d'options :
+            \begin{itemize}
+                \item La taille de la police : \textbf{10pt}, \textbf{11pt} et \textbf{12pt};
+                \item Le type de papier : \textbf{a4paper}, \textbf{a5paper}, \textbf{letterpaper}, \textbf{b5paper}, \textbf{executivepaper} et \textbf{legalpaper};
+                \item Recto-verso : \textbf{twoside}, ou non \textbf{oneside};
+                \item Paysage : \textbf{landscape};
+                \item Deux colonnes : \textbf{twocolumn};
+                \item Formules (maths) : Placées à gauche : \textbf{fleqn};
+                \item Page de présentation : \textbf{titlepage} ou non \textbf{notitlepage};
+                \item Début de chapitre : à droite \textbf{openright}, ou \textbf{openany}.
+            \end{itemize}
+            On utilise les options ainsi par exemple :
+            \begin{lstlisting}
+\documentclass[12pt,openany,landscape]{book}
+            \end{lstlisting}
+    \section{En-tête}
+        \emph{Ici, on définit l'aspect graphique du document. On les place entre le \textbackslash documentclass\{\} et le \textbackslash begin\{document\}.}
+        \subsection{Les couleurs}
+            \begin{lstlisting}
+\usepackage[usenames,x11names]{xcolor}
+            \end{lstlisting}
+            Il suffit d'aller sur \textit{Google} et de taper \textit{latex x11names}.\\
+            Si la liste est trop courte, vous pouvez en créer :
+            \begin{lstlisting}
+\definecolor{nom1}{rgb}{1,0.5,0} % De 0 à 1
+\definecolor{nom2}{RGB}{255,128,0} % 0 à 255
+\definecolor{nom3}{HTML}{FF8000} % De 0 à F
+            \end{lstlisting}
+            Vous pouvez :
+            \begin{lstlisting}
+\pagecolor{couleur} % Fond de page
+\textcolor{couleur}{texte} % Texte colorer
+{\color{couleur}texte} % Identique
+\colorbox{couleur}{texte} % Fond du texte
+\colorbox{coul1}{\color{coul2}text} % Les 2
+            \end{lstlisting}
+        \subsection{Polices d'écriture}
+            Voir : \url{http://www.tug.dk/FontCatalogue/}.\\Il suffit d'ajouter une ou deux lignes en général dans l'en-tête.\\
+            Si la police possède des variantes, il faut parfois indiquer le style après le \textit{\textbackslash begin\{document\}}.\\
+            Les éléments de structure ne sont pas impactés ! Exemple :
+            \begin{lstlisting}
+\documentclass{article}
+  % On indique la police (2 lignes)
+  \usepackage{emerald}
+  \usepackage[T1]{fontenc}
+\begin{document}
+  \ECFAugie % On indique le formattage
+  Mon texte stylisé
+\end{document}
+            \end{lstlisting}
+        \subsection{Styliser les éléments de structure}
+            Il faut utiliser le package \textbf{titlesec} et faire :
+            \begin{lstlisting}
+\usepackage{titlesec}
+\titleformat{\chapter}{\LARGE\bfseries}{Chapitre : \thechapter}
+% ou \titleformat{\chapter}{\LARGE\bfseries}
+%\titleformat{structure}{apparence}{label}
+            \end{lstlisting}
+            Les \textit{structure}s et l'\textit{apparence} sont définis par la suite.\\Pour le \textit{label}, il s'agit de l'aspect textuel. Il est facultatif. Pour appeler le nom de la structure, on utilise : \textbf{\textbackslash thestructure}.
+
+        \subsection{Méta-informations}
+            Il s'agit du titre, de l'auteur et de la date du document :
+            \begin{lstlisting}
+\title{Mon titre} \author{Moi !}
+\thanks{Merci à ...} \date{2016}
+            \end{lstlisting}
+            Par défaut, la date indiquera le jour, le mois et l'année (\textbf{\textbackslash today}). Suivant la classe, il faudra ajouter la page de titre : \textbf{\textbackslash maketitle}.
+        \subsection{Méta-informations des pages}
+            \begin{lstlisting}
+\usepackage{fancyhdr,lastpage}
+\fancyhead[L]{06/2014}\fancyfoot[R]{Moi}
+\fancyfoot[C]{\thepage/\pageref{LastPage}}
+            \end{lstlisting}
+            \textbf{\textbackslash fancyhead} pour le haut et \textbf{\textbackslash fancyhead} pour le bas.\\
+            \textbf{L} : Gauche, \textbf{C} : Center, \textbf{R} : Droite.
+
+        \subsection{Marges}
+            \begin{lstlisting}
+\usepackage[top=XX.XXcm,bottom=XX.XXcm,
+   left=XX.XXcm,right=XX.XXcm]{geometry}
+            \end{lstlisting}
+            On peut mettre une seule option, ou plusieurs !
+
+
+    \section{Éléments graphiques}
+        \subsection{Éléments simples}
+            \begin{lstlisting}
+\LaTeX % Logo Latex
+\newpage % Nouvelle page
+\footnote{Ma note} % Note de bas de page
+\textbf{Texte} ou {\bfseries Texte} % Gras
+\textit{Texte} ou {\itshape Texte} %Italique
+\textsc{Texte} ou {\scshape Texte} %Captital
+\uppercase{Texte} % Majuscule
+\underline{Texte} % Souligné
+{\centering Texte} % Centre le texte ou élem
+\begin{center}Texte\end{center} % Idem
+            \end{lstlisting}
+            Tailles d'écritures (\textit{\{\textbackslash taille texte\}} ou \textit{\textbackslash taille texte}) :
+            \begin{itemize}
+                \item Petit : \textbf{\textbackslash tiny}, \textbf{\textbackslash scriptsize}, \textbf{\textbackslash footnotesize};
+                \item Moyen : \textbf{\textbackslash small}, \textbf{\textbackslash normalsize}, \textbf{\textbackslash large};
+                \item Grand : \textbf{\textbackslash Large}, \textbf{\textbackslash LARGE}, \textbf{\textbackslash huge}, \textbf{\textbackslash HUGE}.
+            \end{itemize}
+        \subsection{Les structures}
+            Inutilisable dans les \textit{letter} ! De la plus à la moins importante :
+            \begin{enumerate}
+                \setcounter{enumi}{-2}
+                \item \textbf{\textbackslash part} : Les parties (facultatif);
+                \item \textbf{\textbackslash chapter} : Pour les \textit{book}, \textit{memoir} et \textit{report};
+                \item \textbf{\textbackslash section}, \textbf{\textbackslash subsection}, \textbf{\textbackslash subsubsection};
+                \item \textbf{\textbackslash paragraph}, \textbf{\textbackslash subparagraph}.
+            \end{enumerate}
+            Un \textbf{paragraph}, \textbf{chapter} et \textbf{section} ne nécéssitent pas un élément plus important. On les utilise ainsi :
+            \begin{lstlisting}
+\section{Mon gros titre}
+\subsection{Mon sous-titre}
+\paragraph*{Mon paragraphe}
+            \end{lstlisting}
+            Pour afficher le sommaire dans le document :
+            \begin{lstlisting}
+\tableofcontents % 2 COMPILATIONS REQUISES
+            \end{lstlisting}
+            On peut éviter la numérotation avec $^*$ (Voir ci-dessus) mais il n'est pas dans le sommaire, sauf si l'on met ceci avant l'élément :
+            \begin{lstlisting}
+\addcontentsline{toc}{STRUCTURE_TYPE}{LABEL}
+\addcontentsline{toc}{chapter}{Mon chapitre}
+            \end{lstlisting}
+        \subsection{Créer des espaces}
+            \subsubsection{Basiques}
+                Pour aller à la ligne : \textbf{\textbackslash\textbackslash}.\\
+                Pour aller en bas d'une page : \textbf{\textbackslash vfill}.\\
+                Pour aller à droite : \textbf{\textbackslash hfill}.
+                Espace vertical : \textbf{\textbackslash vspace\{XX unité\}}.\\
+                Espace horizontal : \textbf{\textbackslash hspace\{XX unité\}}.\\
+                \textbf{XX} est un nombre entier et \textbf{unité} en \textit{cm}, \textit{mm}, \textit{pt} (point) ou \textit{in} (inch).
+            \subsubsection{Alinéas}
+                \begin{lstlisting}
+\setlength{\parindent}{1cm} % Alinéa de 1cm
+\noindent % Pas d'alinéa
+                \end{lstlisting}
+        \subsection{Les images}
+            \begin{lstlisting}
+\usepackage{graphicx}
+            \end{lstlisting}
+            La commande est : \textit{\textbackslash includesgraphics[options]\{image.format\}}.\\
+            L'image doit être à côté du document en \textit{.tex}.\\
+            Les options sont séparées par une virgule et facultatives :
+            \begin{itemize}
+                \item \textbf{width=..px} et \textbf{height=..px} : Ratio non respecté;
+                \item \textbf{scale=..} : Ratio respecté;
+                \item \textbf{angle=..} : Angle en degré.
+            \end{itemize}
+            On peut les accompagnées d'un titre :
+            \begin{lstlisting}
+\begin{figure}[p]
+    \includegraphics[options]{image.png}
+    \caption{Mon image}
+    \label{fig:mon_image}
+\end{figure}
+            \end{lstlisting}
+        \subsection{Les liens}
+            \subsubsection{Lien dans le document}
+                Pour référencer un élément du document sur une autre page:
+                \begin{lstlisting}
+\label{mon-marqueur} % Marqueur
+\ref{mon-marqueur} % Lien vers le marqueur
+\pageref{mon-marqueur} % Numéro de page
+                \end{lstlisting}
+            \subsubsection{Lien vers internet}
+                \begin{lstlisting}
+\usepackage[colorlinks,urlcolor=c1,
+  linkcolor=c2]{hyperref}
+                \end{lstlisting}
+                \textbf{c1} et \textbf{c2} sont des NOMS de couleurs ! Par exemple \textit{red}, \textit{blue} ou personnel. (Options facultatives). Usage :
+                \begin{lstlisting}
+\url{http://} ou \href{http://}{Nom page}
+\href{mailto:mail@domain.org}{Nom mail}
+                \end{lstlisting}
+        \subsection{Codes sources}
+            \begin{lstlisting}
+\usepackage{listingsutf8}
+            \end{lstlisting}
+            Usage :\\
+            \colorbox{grisClair}{\textbf{\textbackslash begin\{lstlisting\}[options]\\Mon code source\\\textbackslash end\{lstlisting\}}}\\
+            Les options sont variées :
+            \begin{itemize}
+                \item \textbf{language=xx} : C, TeX, PHP, HTML, etc. (Voir web);
+                \item \textbf{breaklines=true|false} : Aller à la ligne;
+                \item \textbf{keywordstyle=xx} et \textbf{commentstyle=xx} : Style des mots clés et des commentaires : En gras, couleurs, etc;
+                \item \textbf{otherkeywords=\{*,mot,mot2\}} : Autres mots clés;
+                \item \textbf{numbers=left|right|none} : Numéros de ligne;
+                \item \textbf{backgroundcolor=\textbackslash color\{xx\}} : Fond;
+                \item \textbf{stringstyle=xx} : Style des chaines de caractères;
+                \item Et d'autres !
+            \end{itemize}
+            On peut définir un style général dans l'en-tête :
+            \begin{lstlisting}
+\lstset{ background=\color{blue},
+  language={LaTeX}[TeX] }
+            \end{lstlisting}
+            Ou bien un style particulier dans l'en-tête:
+            \begin{lstlisting}
+\lstdefinestyle{myStyle}{
+  backgroundcolor=\color{yellow} }
+            \end{lstlisting}
+            Et on l'utilise ainsi dans les options en mettant \textbf{style=myStyle}. De plus on peut include un code source externe :
+            \begin{lstlisting}
+\lstinputlisting[options]{monSource.format}
+            \end{lstlisting}
+        \subsection{Les listes}
+            \subsubsection{Listes numérotées}
+            \begin{lstlisting}
+\begin{enumerate}
+  \item Texte ou autre liste item. ou enum.
+\end{enumerate}
+            \end{lstlisting}
+            On peut modifier le numéro actuel avec (à côté de \textbf{\textbackslash item}) :
+            \begin{lstlisting}
+\setcounter{enumi}{NOMBRE POS. OU NÉG.}
+            \end{lstlisting}
+            \subsubsection{Listes non-numérotées}
+                Remplacer \textbf{enumerate} par \textbf{itemize}.
+        \subsection{Les tableaux}
+            Un tableau est défini ainsi :
+            \begin{lstlisting}
+\begin{tabular}{DETAIL_COLONNES}
+  \hline   CONTENU_LIGNE \\
+  \hline   CONTENU_LIGNE \\   \hline
+\end{tabular}
+            \end{lstlisting}
+            Les \textbf{\textbackslash hline} permettent de faire une ligne horizontale.\\
+            \textit{DETAIL\_COLONNES} est composé de $l, c, r, p\{Xcm\}, |, ||$, respectivement \textit{left}, \textit{center} et \textit{right} : ils indiquent la position du texte dans la colonne. $p\{Xcm\}$ permet de forcer le texte à aller à la ligne. $|$ et $||$ indiquent qu'il y a une ou deux lignes verticales.\\
+            \textit{CONTENU\_LIGNE} est composé de TOUTES vos colonnes, séparées juste par \textbf{\&}.
+            \begin{lstlisting}
+\begin{tabular}{| l r || l r |}
+  \hline
+    $a$ & 1 & $\&$ & 2 \\
+  \hline
+\end{tabular}
+            \end{lstlisting}
+            Entourer d'un \textbf{\textbackslash begin\{center\} TABLEAU \textbackslash end\{center\}} votre tableau le rendra plus agréable.\\
+            La fusion d'une case se fait avec (à la place du texte) :
+            \begin{lstlisting}
+\multicolumn{NB_COLONNE}{X}{TEXTE}
+            \end{lstlisting}
+            \textbf{X} correspond à $l, c, r, p\{Xcm\}, |$ et ou $||$, on peut mettre UNE lettre seulement ! \textbf{NB\_COLONNE} = colonnes remplacées.
+        \subsection{Échapper les caractères (IMPORTANT)}
+            Il faut les échapper sinon la compilation échoue !!!
+            \begin{center}
+                \begin{tabular}{| l r || l r || l r |}
+                    \hline
+                    $\%$ & \textbackslash \% & $\&$ & \textbackslash \& & $\$$ & \textbackslash \$\\
+                    \hline
+                    $\#$ & \textbackslash \# & $\{$ & \textbackslash \{ & $\}$ & \textbackslash \}\\
+                    \hline
+                    $\_$ & \textbackslash \_ & $\textbackslash$ & \multicolumn{3}{r|}{\textbackslash textbackslash} \\
+                    \hline
+                \end{tabular}
+            \end{center}
+        \subsection{Page de garde}
+            La page de garde est définie par :
+            \begin{lstlisting}
+\begin{document}
+  \begin{titlepage}
+    {\HUGE Votre page \today}
+  \end{titlepage}
+  ... % Votre document
+\end{document}
+            \end{lstlisting}
+            Il suffit de "\textit{créer des espaces basiques}" pour mettre en page.
+
+\input{include/foot-document}
+\end{document}
