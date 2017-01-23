@@ -44,6 +44,7 @@ Tout compiler :
 
 Compiler un seul document :
 
+    make arduino
     make haskell
     make latex
     make latex-advanced

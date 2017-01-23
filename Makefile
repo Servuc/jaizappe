@@ -6,6 +6,9 @@ PDFLATEX=pdflatex
 # COMPILE
 all: haskell latex latex-advanced octave xml
 
+arduino: clean-compile
+	$(PDFLATEX) arduino.tex
+
 haskell: clean-compile
 	$(PDFLATEX) haskell.tex
 
