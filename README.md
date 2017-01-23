@@ -10,6 +10,7 @@ Petits mémos pour être le plus fort !
 
 Vous pouvez télécharger les fichiers déjà compilés :
 
+ - [Arduino](https://github.com/Servuc/jaizappe/raw/master/arduino.pdf)
  - [Haskell](https://github.com/Servuc/jaizappe/raw/master/haskell.pdf)
  - [LaTeX](https://github.com/Servuc/jaizappe/raw/master/latex.pdf)
  - [LaTeX Advanced](https://github.com/Servuc/jaizappe/raw/master/latex-advanced.pdf)
@@ -59,4 +60,4 @@ Supprimer les fichiers :
 
 ## Vous l'utilisez en cours ?
 
-Faites le moi savoir en me contactant, ou par une *issue Github* ! (;3
+Faites le moi savoir en me contactant, ou par une *issue Github* ! 🐻
