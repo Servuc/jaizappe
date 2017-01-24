@@ -20,7 +20,13 @@
 \usepackage[babel=true]{csquotes}
 \captionsetup{figurewithin=none}
 \captionsetup{tablewithin=none}
+\usepackage{changepage}
 
+\def\changemargin#1#2#3#4{\list{}{\parsep#4\topsep#3\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist
+
+\newcommand{\bmar}{\begin{changemargin}{0.2cm}{0.2cm}{-0.07cm}{0cm} }
+\newcommand{\emar}{\end{changemargin}}
 
 \lstset{literate=
   {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
