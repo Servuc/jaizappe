@@ -25,14 +25,14 @@ void setup() {
     //Exécuté en premier
 }
 void loop() {
-    //Exécuter après setup() en boucle
+    //Exécuté après setup() en boucle
 }
         \end{lstlisting}
 
 
         \subsection{Calcul binaire}
             \bmar
-                Récupérer la partie \textit{big} et \textit{low} :
+                Récupérer les parties \textit{big} et \textit{low} d'une valeur:
             \emar
 
             \begin{lstlisting}[language=C]
@@ -85,7 +85,7 @@ Serial.begin( SPEED );
             \end{lstlisting}
             \bmar
                 \textbf{SPEED} vaut $9600$, $57600$ ou $115200$ en général. Vitesse en baud.\\
-                Écrire le moniteur de débug :
+                Écrire sur le moniteur de débug :
             \emar
 
             \begin{lstlisting}[language=C]
@@ -130,23 +130,23 @@ SoftwareSerial mSerial(PIN_RX, PIN_TX);
                 \item Support 1 : \textit{TX} $\leftrightarrow$ \textit{RX} : Support 2
             \end{itemize}
             \bmar
-                Si \textit{SoftwareSerial} sont initialisés, un seul peut être en écoute :
+                Si plus d'un \textit{SoftwareSerial} est initialisé, un seul peut être en écoute grâce à la première fonction :
             \emar
             \begin{lstlisting}[language=C]
 mSerial.listen();
 mSerial.isListening();
             \end{lstlisting}
 
-    \section{Les Pins}
+    \section{Les broches}
         \bmar
-            Il est conseillé de définir les pins :
+            Il est conseillé de définir les broches :
         \emar
         \begin{lstlisting}[language=C]
 #define PIN_FCT_ABCD 5
         \end{lstlisting}
 
         \bmar
-            Indiquer le mode le pin (dans \textit{setup()}):
+            Indiquer le mode de la broche (dans \textit{setup()}):
         \emar
 
         \begin{lstlisting}[language=C]
@@ -156,8 +156,8 @@ pinMode( PIN_ID, OUTPUT ); //Ecriture
 
         \subsection{Analogiques}
             \bmar
-                Notées $AX$ ($X$ un nombre). \textbf{PIN\_ID} noté $AX$ aussi.\\
-                Mettre la valeur d'un pin (mode \textbf{OUTPUT}) :
+                Notées $AX$ ($X$ un nombre). \textbf{PIN\_ID} notée $AX$ aussi.\\
+                Mettre la valeur d'une broche (mode \textbf{OUTPUT}) :
             \emar
 
             \begin{lstlisting}[language=C]
@@ -165,7 +165,7 @@ analogWrite( PIN_ID, value ); // 0 - 255
             \end{lstlisting}
             \vspace{0.5cm}
             \bmar
-                Récupérer la valeur d'un pin (pas de mode):
+                Récupérer la valeur d'une broche (pas de mode):
             \emar
 
             \begin{lstlisting}[language=C]
@@ -174,7 +174,7 @@ float myVoltage = myVal * (VOLT_MAX / 1023.0);
             \end{lstlisting}
 
             \bmar
-                Fixé la valeur de lecture sur les pins analogiques :
+                Fixer la valeur de lecture sur les broches analogiques :
             \emar
 
             \begin{lstlisting}[language=C]
@@ -195,13 +195,13 @@ analogReference(value);
                 \end{tabular}
             \end{center}
 
-        \subsection{Digitals}
+        \subsection{Digitales}
 
             \bmar
                 Notées $dX$ ou $X$ ($X$ un nombre). Égale à $0$ ou $1$.\\
                 Correspondant respectivement à \textbf{LOW} et \textbf{HIGH}.\\
 
-                Mettre la valeur d'un pin (mode \textbf{OUTPUT}) :
+                Mettre la valeur d'une broche (mode \textbf{OUTPUT}) :
             \emar
 
             \begin{lstlisting}[language=C]
@@ -210,7 +210,7 @@ digitalWrite( PIN_ID, LOW );  //0 = 0V
             \end{lstlisting}
 
             \bmar
-                Récupérer la valeur d'un pin (mode \textbf{INPUT}) :
+                Récupérer la valeur d'une broche (mode \textbf{INPUT}) :
             \emar
 
             \begin{lstlisting}[language=C]
@@ -218,7 +218,7 @@ int myVal = digitalRead( PIN_ID );
             \end{lstlisting}
 
             \bmar
-                Cependant, il faut stabiliser le pin à 0 ou 5/3.3V. Exemple :
+                Cependant, il faut stabiliser la broche à 0 ou 5/3.3V. Exemple :
             \emar
 
             \begin{center}
@@ -230,7 +230,7 @@ int myVal = digitalRead( PIN_ID );
             \bmar
                 Inutilisable avec les Arduino \textit{Gemma} et \textit{Due}.\\
                 Émettre une tonalité avec un Arduino avec un piezo, un haut parleur,
-                \textbf{pin} doit être noté \textit{PWM}. \textbf{time} en millisecondes.
+                \textbf{pin} doit être notée \textit{PWM}. \textbf{time} en millisecondes.
             \emar
 
             \begin{center}
@@ -257,7 +257,7 @@ noTone();
 
 
             \bmar
-                Lire une impulsion (signal continu)sur un pin digital de 10 microsecondes à 3 minutes,\\
+                Lire une impulsion (signal continu) sur une broche digitale de 10 microsecondes à 3 minutes,\\
                 \textit{value} : \textbf{HIGH} et \textbf{LOW}, \textit{timeout} : Attente max. en microsecondes.
             \emar
             \begin{lstlisting}[language=C]
@@ -271,7 +271,7 @@ delay( MILLI_SECONDS );
 delayMicroseconds( MICRO_SECONDS );
         \end{lstlisting}
         \bmar
-            Un \textit{delay()} peut être arrêté par une action sur un pin digital :
+            Un \textit{delay()} peut être arrêté par une action sur une broche digit. :
         \emar
 
         \begin{center}
@@ -314,7 +314,7 @@ attachInterrupt(
         \end{enumerate}
 
         \bmar
-            Enlever une interruption sur un pin :
+            Enlever une interruption sur une broche :
         \emar
         \begin{lstlisting}[language=C]
 detachInterrupt(
@@ -348,13 +348,13 @@ interrupts();
                 \begin{tabular}{l l | l l | l l}
                     Sinus & $sin(x,y)$ & Cosinus & $cos(x) $ & Tang. & $tan(x,y)$\\
                     Mini. & $min(x,y)$ & Racine & $sqrt(x) $ & Absolu & $abs(x,y)$\\
-                    Maxi. & $max(x,y)$ & Puiss. & $pow(x,y)$ & &\\ \\
+                    Maxi. & $max(x,y)$ & Puiss. & $pow(x,y)$ & &\\
                 \end{tabular}
             \end{center}
 
             \bmar
             $constrain(x, min, max)$ : Retourne $x$ si $min < x < max$ sinon une valeur extrème.\\
-            $map(x, minSource, maxSource, minDest, maxDest)$ : Retourne $x$ adapté aux extrèmes de destination en fonction des extrèmes sources.
+            $map(x, minSource, maxSource, minDest, maxDest)$ :\\Retourne $x$ adapté aux extrèmes de destination en fonction des extrèmes sources.
             \emar
         \subsection{Aléatoire}
             \bmar
@@ -378,8 +378,7 @@ long random(min, max);
             Temps écoulé depuis le démarrage :
             \emar
             \begin{lstlisting}[language=C]
-unsigned long millis();
-unsigned long micros();
+unsigned long millis();unsigned long micros();
             \end{lstlisting}
             \bmar
                 \textit{Overflow} de \textit{millis()} et \textit{micros()} à $50$ jours et $70$ minutes.\\
@@ -396,18 +395,10 @@ delayMicroseconds(microSeconds);
         \subsection{EEPROM}
             \bmar
                 Un Arduino a une mémoire flash pour les variables, l'EEPROM.\\
-                Attention, le nombre d'écriture est limitée !
+                Attention, le nombre d'écriture est limitée ! ($\sim$ 100 000)
             \emar
             \begin{lstlisting}[language=C]
 #include <EEPROM.h>
-            \end{lstlisting}
-            \bmar
-                Vider l'EEPROM :
-            \emar
-            \begin{lstlisting}[language=C]
-for (int i = 0 ; i < EEPROM.length() ; i++) {
-    EEPROM.write(i, 0);
-}
             \end{lstlisting}
             \bmar
                 Écrire dans l'EEPROM :
@@ -429,6 +420,14 @@ EEPROM.get(address, value2);  // all
             \emar
             \begin{lstlisting}[language=C]
 EEPROM.update(address, value); // 0-255
+            \end{lstlisting}
+            \bmar
+                Vider l'EEPROM :
+            \emar
+            \begin{lstlisting}[language=C]
+for (int i = 0 ; i < EEPROM.length() ; i++) {
+    EEPROM.write(i, 0);
+}
             \end{lstlisting}
 
         \subsection{Autres}
@@ -454,10 +453,10 @@ const type varName[] PROGMEM = {d0, d1, ...};
 const PROGMEM type varName[] = {d0, d1, ...};
             \end{lstlisting}
 
-
+            \vspace{0.2cm}
 
             \begin{center}
-                \includegraphics[scale=0.6]{img/arduino-uno-frietzing}
+                \includegraphics[scale=0.65]{img/arduino-uno-frietzing}
             \end{center}
     \input{include/foot-document}
 \end{document}
